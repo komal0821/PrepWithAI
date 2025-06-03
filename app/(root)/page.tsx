@@ -1,16 +1,16 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import InterviewCard from '@/components/InterviewCard'
-// import { dummyInterviews } from '@/constants'
 import { Button } from '@/components/ui/button'
-import { getCurrentUser, getInterviewByUserId, getLatestInterviews } from '@/lib/actions/auth.action'
+import { getCurrentUser } from '@/lib/actions/auth.action'
+import {getInterviewsByUserId, getLatestInterviews} from '@/lib/actions/general.action'
 // import { late } from 'zod'
 
 
 const page = async () => {
   const user = await getCurrentUser();
   const [userInterviews, allInterview] = await Promise.all([
-    await getInterviewByUserId(user ?. id!),
+    await getInterviewsByUserId(user ?. id!),
     await getLatestInterviews({userId: user?.id!})
   ])
   
